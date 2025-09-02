@@ -1,0 +1,10 @@
+{
+  "name": "ADL LSI BI FTP Decoder",
+  "version": "0.0.1",
+  "description": "ADL Plugin for collecting data from Burundi LSI FTP",
+  "author": "TODO",
+  "author_url": "TODO",
+  "url": "TODO",
+  "license": "TODO",
+  "contact": "TODO"
+}
