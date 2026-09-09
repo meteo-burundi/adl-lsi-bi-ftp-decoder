@@ -1,0 +1,61 @@
+# Screenshot manifest for the ADL LSI BI FTP Decoder guide (docs/guide.md).
+# Regenerate from the adl repo:  scripts/capture-plugin-docs.sh ../adl-plugins/adl-lsi-bi-ftp-decoder
+# Fixture (execution pass): an ADL FTP Plugin connection (id 1) using the lsi_burundi decoder,
+# pointed at the harness's mock FTP source serving a sample LSI export (two header rows,
+# Date/time column). Station link 1 = DEMO001. NOTE: release 0.1.1 cannot decode, so the
+# data-files shot will show unprocessed rows — honest, and what an operator on 0.1.1 sees.
+# Selectors are blind guesses — fix against the live pages.
+
+defaults:
+  viewport:
+  - 1440
+  - 900
+  padding: 12
+screenshots:
+- name: lsi_bi_connection_form
+  url: /networkftp/edit/1/
+  setup:
+  - fill: { selector: '#id_password', value: '••••••••••••' }
+  callouts:
+  - highlight: '#id_decoder'
+  capture:
+    selector: "#w-editor-form"
+- name: lsi_bi_variable_mappings
+  url: /networkftp/edit/1/
+  capture:
+    selector: '#panel-variable_mappings-section'
+- name: lsi_bi_station_link_form
+  url: /ftpstationlink/edit/1/
+  callouts:
+  - badge:
+      target: '#panel-child-remote_configuration-child-ftp_path-wrapper'
+      n: 1
+  - badge:
+      target: '#id_file_pattern'
+      n: 2
+  - badge:
+      target: '#id_listing_strategy'
+      n: 3
+  - badge:
+      target: '#id_start_date'
+      n: 4
+  - badge:
+      target: '#id_skip_already_downloaded_files'
+      n: 5
+  capture:
+    selector: "#w-editor-form"
+- name: lsi_bi_ingestion_diagnostic
+  url: /monitoring/connection/1/health/
+  callouts:
+  - highlight: .health-probe-form button
+  capture:
+    selector: .health-diagnostic
+- name: lsi_bi_station_source_check
+  url: /ftpstationlink/inspect/1/
+  capture:
+    selector: ":nth-match(.collection-status, 2)"
+- name: lsi_bi_data_files
+  url: /snippets/adl_ftp_plugin/ftpstationdatafile/
+  capture:
+    selector: main
+    max_height: 1200
